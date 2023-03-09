@@ -1,18 +1,17 @@
-<?php
-session_start();
-include("adm/conexao.php");
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dtr das motos</title>
     <link rel="stylesheet" href="style.css">
     <script src="index.js"></script>
-
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -20,12 +19,12 @@ include("adm/conexao.php");
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+
 
 
 </head>
@@ -61,16 +60,16 @@ include("adm/conexao.php");
 
 
         <form class="navbar-form form-inline" method="GET" action="detalhesproduto.php">
-        <div class="input-group search-box">
-            <input type="text" id="search" name="search" class="form-control" placeholder="Buscar produto">
-            <div class="input-group-append">
-                <button type="submit" class="btn">
-                    <i class="material-icons">&#xE8B6;</i>
-                </button>
+            <div class="input-group search-box">
+                <input type="text" id="search" name="search" class="form-control" placeholder="Buscar produto">
+                <div class="input-group-append">
+                    <button type="submit" class="btn">
+                        <i class="material-icons">&#xE8B6;</i>
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
-    
+        </form>
+
         <!-- conta -->
         <div class="navbar-nav ml-auto action-buttons">
             <div class="nav-item dropdown">
@@ -101,7 +100,7 @@ include("adm/conexao.php");
             <div class="nav-item dropdown">
                 <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle sign-up-btn">Cadastre-se</a>
                 <div class="dropdown-menu action-form">
-                    <form action="adm/salvarusuarios.php" method="post" onsubmit="validateForm()">
+                    <form action="adm/conexao.php" method="post" onsubmit="validateForm()">
                         <p class="hint-text">Crie sua conta</p>
                         <div class="form-group">
                             <input type="nome" class="form-control" placeholder="Seu nome" required="required" name="nome">
@@ -165,42 +164,197 @@ include("adm/conexao.php");
 
 <!--Produtos-->
 
+<!-- Capacetes -->
+<?php
+include("adm/conexao.php");
+$conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+$sql = "SELECT * FROM produtos WHERE produtonome = 'Capacete' ORDER BY id DESC";
+
+$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+?>
+<div class="container">
+    <h1>Capacetes</h1>
+    <div class="row">
+        <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+            <div class="MultiCarousel-inner">
+                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                    <div class="item">
+
+                        <div class="pad15">
+
+                            <div class="card">
+                                <div class="amei"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                    </svg>
+                                </div>
+                                <h4 class="nomeproduto"><?php echo $row["produtonome"]; ?></h4>
+
+                                <img src="data:image/jpeg;base64,<?php echo base64_encode($row["image"]); ?>" />
+
+                                <?php echo $row["produtopreco"]; ?>
+                                <button class="comprar" onclick="window.location.href='detalhesproduto.php';">Comprar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+            <?php
+            mysqli_close($conn);
+            ?>
+            <button class="btn btn-primary leftLst"></button>
+            <button class="btn btn-primary rightLst"></button>
+        </div>
+    </div>
+</div>
+
+<!-- Luvas -->
 
 <?php
 include("adm/conexao.php");
+$conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+$sql = "SELECT * FROM produtos WHERE produtonome = 'Luva' ORDER BY id DESC";
 
-$conexao = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
-
-$sql = 'SELECT * FROM produtos ORDER BY image ASC';
-$result = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 ?>
-
-<div class="row justify-content-between">
-    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-        <div class="col-md-3 mt-2">
-            
-            <div class="card">
-
-
-               <h4> <?php echo  $row["produtonome"]; ?> </h4>
-                <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($row["image"]) . '" />'; ?>
-               
-                <?php echo $row["produtopreco"]; ?>
-                <button class="comprar" onclick="window.location.href='detalhesproduto.php';">Comprar</button>
-                <button class="carrinho">Adicionar ao carrinho</button>
+<div class="container">
+    <h1>Luvas</h1>
+    <div class="row">
+        <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+            <div class="MultiCarousel-inner">
+                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                    <div class="item">
+                        <div class="pad15">
+                            <div class="card">
+                                <h4 class="nomeproduto"><?php echo $row["produtonome"]; ?></h4>
+                                <img src="data:image/jpeg;base64,<?php echo base64_encode($row["image"]); ?>" />
+                                <?php echo $row["produtopreco"]; ?>
+                                <button class="comprar" onclick="window.location.href='detalhesproduto.php';">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
-            
+            <?php
+            mysqli_close($conn);
+            ?>
+            <button class="btn btn-primary leftLst"></button>
+            <button class="btn btn-primary rightLst"></button>
         </div>
-    <?php } ?>
+    </div>
 </div>
 
-<?php
-mysqli_close($conexao);
-?>
 
 
 
+
+<script>
+    $(document).ready(function() {
+        var itemsMainDiv = ('.MultiCarousel');
+        var itemsDiv = ('.MultiCarousel-inner');
+        var itemWidth = "";
+
+        $('.leftLst, .rightLst').click(function() {
+            var condition = $(this).hasClass("leftLst");
+            if (condition)
+                click(0, this);
+            else
+                click(1, this)
+        });
+
+        ResCarouselSize();
+
+
+
+
+        $(window).resize(function() {
+            ResCarouselSize();
+        });
+
+
+        function ResCarouselSize() {
+            var incno = 0;
+            var dataItems = ("data-items");
+            var itemClass = ('.item');
+            var id = 0;
+            var btnParentSb = '';
+            var itemsSplit = '';
+            var sampwidth = $(itemsMainDiv).width();
+            var bodyWidth = $('body').width();
+            $(itemsDiv).each(function() {
+                id = id + 1;
+                var itemNumbers = $(this).find(itemClass).length;
+                btnParentSb = $(this).parent().attr(dataItems);
+                itemsSplit = btnParentSb.split(',');
+                $(this).parent().attr("id", "MultiCarousel" + id);
+
+
+                if (bodyWidth >= 1200) {
+                    incno = itemsSplit[3];
+                    itemWidth = sampwidth / incno;
+                } else if (bodyWidth >= 992) {
+                    incno = itemsSplit[2];
+                    itemWidth = sampwidth / incno;
+                } else if (bodyWidth >= 768) {
+                    incno = itemsSplit[1];
+                    itemWidth = sampwidth / incno;
+                } else {
+                    incno = itemsSplit[0];
+                    itemWidth = sampwidth / incno;
+                }
+                $(this).css({
+                    'transform': 'translateX(0px)',
+                    'width': itemWidth * itemNumbers
+                });
+                $(this).find(itemClass).each(function() {
+                    $(this).outerWidth(itemWidth);
+                });
+
+                $(".leftLst").addClass("over");
+                $(".rightLst").removeClass("over");
+
+            });
+        }
+
+
+
+        function ResCarousel(e, el, s) {
+            var leftBtn = ('.leftLst');
+            var rightBtn = ('.rightLst');
+            var translateXval = '';
+            var divStyle = $(el + ' ' + itemsDiv).css('transform');
+            var values = divStyle.match(/-?[\d\.]+/g);
+            var xds = Math.abs(values[4]);
+            if (e == 0) {
+                translateXval = parseInt(xds) - parseInt(itemWidth * s);
+                $(el + ' ' + rightBtn).removeClass("over");
+
+                if (translateXval <= itemWidth / 2) {
+                    translateXval = 0;
+                    $(el + ' ' + leftBtn).addClass("over");
+                }
+            } else if (e == 1) {
+                var itemsCondition = $(el).find(itemsDiv).width() - $(el).width();
+                translateXval = parseInt(xds) + parseInt(itemWidth * s);
+                $(el + ' ' + leftBtn).removeClass("over");
+
+                if (translateXval >= itemsCondition - itemWidth / 2) {
+                    translateXval = itemsCondition;
+                    $(el + ' ' + rightBtn).addClass("over");
+                }
+            }
+            $(el + ' ' + itemsDiv).css('transform', 'translateX(' + -translateXval + 'px)');
+        }
+
+
+        function click(ell, ee) {
+            var Parent = "#" + $(ee).parent().attr("id");
+            var slide = $(Parent).attr("data-slide");
+            ResCarousel(ell, Parent, slide);
+        }
+
+    });
+</script>
 </body>
-
 
 </html>

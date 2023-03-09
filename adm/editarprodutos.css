@@ -129,6 +129,13 @@ height: 100%;
 body{
     background-color: #e6e7e7;
 }
+.area{
+ position: relative;
+width: 80%;
+left: 12%;
+
+ 
+}
 .info{
     font-size: 20px;
     font-weight: bold;
@@ -136,7 +143,7 @@ body{
 }
 table {
     margin: 0 auto;
-    width: 80%;
+    width: 100%;
     text-align: center;
     border-collapse: collapse;
     background-color: #cfcece;
@@ -150,16 +157,29 @@ table {
   th {
     background-color: lightgray;
   }
-  .titulo{
-    background-color: #999;
-    color:black;
-    font-size: 22px;
-    font-weight: bold;
+  .excluir{
+    margin: 5px;
+    border-color: transparent;
+    background-color: rgba(255, 5, 5, 0.349);
   }
-  
+  .excluir:hover{
+    border-color: #ff0000c2;
+    background-color: #ff00006e;
+  }
+  .editar{
+    border-color: transparent;
+    background-color:#3e93dd;
+  }
+  .editar:hover{
+    border-color: #1100fdbb;
+    background: #5fa1db9f;
+  }
+
   @media screen and (max-width: 600px) {
     table {
-      width: 100%;
+      width: 10%;
     }
   }
+  
+
   

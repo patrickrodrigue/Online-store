@@ -4,7 +4,6 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-
 }
 
 
@@ -14,8 +13,6 @@
 
 body {
 	font-family: 'Varela Round', sans-serif;
-
-
 }
 
 .error {
@@ -247,56 +244,127 @@ body {
 
 /* cards */
 
-.comprar,
-.carrinho {
-	padding: 0.5rem 0.5rem;
+.comprar {
 	text-transform: uppercase;
-	border-radius: 33px;
-	margin-top: 8px;
+	border-radius: 5px;
+	margin-top: 5px;
 	color: #131313;
 	font-weight: 500;
-
-
 }
 
-.comprar:hover,
-.carrinho:hover {
+.comprar:hover {
 	background-color: rgb(228, 215, 215);
 }
 
 .card {
+
 	width: 90%;
-	left: 6%;
+	left: 15px;
+	min-height: 16em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 5px;
+	padding: 15px;
 	border-radius: 10px;
-	min-height: 35em;
+	transition: all 0.001s ease-in-out;
+
+
+}
+
+.amei {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.amei:hover {
+	transition: all ease-in 0.2s;
+	transform: scale(1.2);
+	cursor: pointer;
+
 }
 
 .card:hover {
-	background-color: #01000507;
-	border-color: rgb(197, 190, 190);
-	transition: all ease-in .1s;
+	background-color: #ffffff;
+	transition: all ease-in 0.2s;
+	transform: scale(1.00);
+	box-shadow: 0 0 10px rgb(168, 165, 165);
+
 }
 
-.card-title:hover {
-	color: #291beb;
+.nomeproduto {
+	position: absolute;
+	top: 5px;
 }
 
 .card img {
-	max-width: 14em;
-
+	font-size: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 150px;
+	height: 150px;
+	margin: 0 auto;
 
 }
 
-.card h4{
-position: relative;
-margin-top: -0.5em;
+
+.card h4 {
+	position: relative;
+	margin-top: -0.5em;
 }
-.card h5{
+
+.card h5 {
 	font-size: 15px;
 }
 
-/* teste */
+
+.row {
+	background-color: #ffffff;
+}
+
+.MultiCarousel {
+	float: left;
+	overflow: hidden;
+	padding: 15px;
+	width: 10px;
+	position: relative;
+}
+
+.MultiCarousel .MultiCarousel-inner {
+	transition: 1s ease all;
+	float: left;
+}
+
+.MultiCarousel .MultiCarousel-inner .item {
+	float: left;
+}
+
+.MultiCarousel .MultiCarousel-inner .item>div {
+	text-align: center;
+	padding: 5px;
+	margin: -15px;
+	background-color: #ffffff;
+	color: #000000;
+}
+
+.MultiCarousel .leftLst,
+.MultiCarousel .rightLst {
+	position: absolute;
+	border-radius: 50%;
+	top: calc(50% - 20px);
+}
+
+.MultiCarousel .leftLst {
+	left: 0;
+}
+
+.MultiCarousel .rightLst {
+	right: 0;
+}
+
+.MultiCarousel .leftLst.over,
+.MultiCarousel .rightLst.over {
+	pointer-events: none;
+	background: #ccc;
+}
